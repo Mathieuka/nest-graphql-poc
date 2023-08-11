@@ -1,0 +1,54 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""recipe """
+type Recipe {
+  id: ID!
+  description: String
+  creationDate: Date!
+  ingredients: [String!]!
+  title: String!
+}
+
+"""autor """
+type Author {
+  id: ID!
+  name: String!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  recipe(id: String!): Recipe!
+  recipes(skip: Int! = 0, take: Int! = 25): [Recipe!]!
+  author(id: String!): Author!
+  authors(name: String! = "john doe"): [Author!]!
+}
+
+type Mutation {
+  addRecipe(newRecipeData: NewRecipeInput!): Recipe!
+  removeRecipe(id: String!): Boolean!
+  addAuthor(newRecipeData: NewAuthorInput!): Author!
+  removeAuthor(id: String!): Boolean!
+}
+
+input NewRecipeInput {
+  title: String!
+
+  """The recipe description"""
+  description: String
+  ingredients: [String!]!
+}
+
+input NewAuthorInput {
+  name: String!
+}
+
+type Subscription {
+  recipeAdded: Recipe!
+  authorAdded: Author!
+}
